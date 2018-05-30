@@ -29,16 +29,16 @@ public class Girl extends Actor implements Character
         GreenfootImage p2 = new GreenfootImage(imageName);
         p2.scale(width, height);
         setImage(p2);
-    }
+    }// end three-arg constructor
     
     public int getJumpConstant()
     {
         return -20;
-    }
+    }// end method getJumpConstant
     public double getFallConstant()
     {
         return .8;
-    }
+    }// end method getFallConstant
     
     public void move()
     {
@@ -46,49 +46,49 @@ public class Girl extends Actor implements Character
         {
             speed = 4;
             move((int)speed);
-        }
+        }// end right for-loop
         else if (Greenfoot.isKeyDown("a"))
         {
             speed = -4;
             move((int)speed);
-        }
+        }// end left for-loop
         if (speed > 0)
         {
             speed = speed - .1;
             move((int)speed);
-        }
+        }// end right slide for-loop
         if (speed < 0)
         {
             speed = speed + .1;
             move((int)speed);
-        }
+        }// end left slide for-loop
     }
     public void jump()
     {
-        ground = 680 - (int)(height*1.15);
-        for(int j=0; j<3; j++)
+        ground = 680 - (int)(height*1.15);      //sets the base ground collision layer
+        for(int j=0; j<3; j++)                  //sets the platform collision layers
         {
             if ((getX()>=Cloud.getLayout(0, j)-150) && (getX()<=Cloud.getLayout(0, j)+150)
                && (getY() <= Cloud.getLayout(1, j)) && (ySpeed >= 0))
             {
                 ground = Cloud.getLayout(1, j) - (int)(height*.5);
-            }
-        }
+            }// end platform layer if
+        }// end platform for-loop
         boolean onGround = ((getY() == ground));
-        if (!onGround)
+        if (!onGround)                          //sets the methods allowed when the character is in the air
         {
             fall();
             attack();
-        }
-        else
+        }// end air if
+        else                                    //jump only activates if the character is on the ground
         {
             if (Greenfoot.isKeyDown("w"))
             {
                 ySpeed = getJumpConstant();
                 setLocation(getX(), getY()+(int)ySpeed);
-            }
-        }
-    }  
+            }// end jump if
+        }// end air else
+    }// end method jump
     public void fall()
     {
         ySpeed = ySpeed + getFallConstant();
@@ -96,10 +96,10 @@ public class Girl extends Actor implements Character
         if (getY() >= ground)
         {
             setLocation (getX(), ground);
-            ySpeed = 0;
-        }
-    } 
-    public void attack()
+            ySpeed = 0;                         //ensures that the character falls and lands on the platform
+        }// end fall if
+    }// end mehod fall
+    public void attack()                        //allows the character to inflict damage for a period of time
     {
         if (Greenfoot.isKeyDown("s"))
         {
@@ -109,12 +109,12 @@ public class Girl extends Actor implements Character
                 if (isTouching(Guy.class))
                 {
                     removeTouching(Guy.class);
-                }
+                }// end kill if
                 killFrame--;
-            }
-        }
-    }
-    public String toString()
+            }// end kill while-loop
+        }// end attack if
+    }// end method attack
+    public String toString()                    //debugs the code
     {
         boolean lineX = ((getX()>=Cloud.getLayout(0, 1)-150) && (getX()<=Cloud.getLayout(0, 1)+150));
         boolean lineY = (getY() <= Cloud.getLayout(1, 1) - (int)(height*1.15));
@@ -122,5 +122,5 @@ public class Girl extends Actor implements Character
         result += "LineX: " + lineX;
         result += "\nLineY: " + lineY;
         return result;
-    }
+    }// end method toString
 }
