@@ -1,0 +1,32 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Cloud here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Cloud extends Ground
+{
+    /**
+     * Act - do whatever the Cloud wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    private static int[][] layout = {{630, 315, 945},
+                             {220, 440, 440}};
+                             
+    public Cloud()
+    {
+        GreenfootImage cloud1 = new GreenfootImage("cloud.png");
+        cloud1.scale(300, 40);
+        setImage(cloud1);
+    }
+    public static int getLayout(int k, int l)
+    {
+        return layout[k][l];
+    }
+    public void act() 
+    {
+        // Add your action code here.
+    }    
+}
