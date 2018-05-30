@@ -20,7 +20,6 @@ public class Guy extends Actor implements Character
     private int ground;
     private int jumpConstant;
     private int killFrame;
-    private int invincibility;
 
     public Guy(String imageName, int width, int height)
     {
@@ -31,20 +30,12 @@ public class Guy extends Actor implements Character
         GreenfootImage p1 = new GreenfootImage(imageName);
         p1.scale(width, height);
         setImage(p1);
-    }
-    
-    public void act()
-    {
-    }
+    }// end three-arg constructor
     
     public int getJumpConstant()
     {
         return -25;
-    }
-    public int getInvincibility()
-    {
-        return invincibility;
-    }
+    }// end method getJumpConstant
     
     public void move()
     {
@@ -52,49 +43,49 @@ public class Guy extends Actor implements Character
         {
             speed = 5;
             move((int)speed);
-            }
+        }// end right if
         else if (Greenfoot.isKeyDown("left"))
         {
             speed = -5;
             move((int)speed);
-        }
-        if (speed > 0)
+        }// end left if
+        if (speed > 0)                          //allows the character to slide when they stop moving
         {
             speed = speed - .2;
             move((int)speed);
-        }
+        }// end right slide if
         if (speed < 0)
         {   
             speed = speed + .2;
             move((int)speed);
-        }
-    }
+        }// end left slide if
+    }// end method move
     public void jump()
     {
-        ground = 680 - (int)(height*1.15);
-        for(int j=0; j<3; j++)
+        ground = 680 - (int)(height*1.15);      //activates the ground collision layer
+        for(int j=0; j<3; j++)                  //activates the platform collision layers
         {
             if ((getX()>=Cloud.getLayout(0, j)-150) && (getX()<=Cloud.getLayout(0, j)+150)
                && (getY() <= Cloud.getLayout(1, j)) && (ySpeed >= 0))
             {
                 ground = Cloud.getLayout(1, j) - (int)(height*.5);
-            }
-        }
+            }// end platform if
+        }// end platform for-loop
         boolean onGround = (getY() == ground);
-        if (!onGround)
+        if (!onGround)                          //accesses eligible methods while in the air
         {
             fall();
             attack();
-        }
+        }// end air if
         else
         {
             if (Greenfoot.isKeyDown("up"))
             {
                 ySpeed = getJumpConstant();
                 setLocation(getX(), getY()+ySpeed);
-            }
-        }
-    }  
+            }// end jump if
+        }// end jump else
+    }// end method jump
     public void fall()
     {
         ySpeed++;
@@ -102,10 +93,10 @@ public class Guy extends Actor implements Character
         if (getY() >= ground)
         {
             setLocation (getX(), ground);
-            ySpeed = 0;
-        }
-    }
-    public void attack()
+            ySpeed = 0;                         //ensures the guy falls and lands on the platform
+        }// end fall if
+    }// end method fall
+    public void attack()                        //allows the character to inflict damage for a period of time
     {
         if ("down".equals(Greenfoot.getKey()))
         {
@@ -115,20 +106,9 @@ public class Guy extends Actor implements Character
                 if (isTouching(Girl.class))
                 {
                     removeTouching(Girl.class);
-                }
+                }// end kill if
                 killFrame--;
-            }
-        }
-    }
-    public void block()
-    {
-        if ("enter".equals(Greenfoot.getKey()))
-        {
-            invincibility = 25;
-            while (invincibility > 0)
-            {
-                invincibility--;
-            }
-        }
-    }
-}
+            }// end kill while-loop
+        }// end attack if
+    }// end method attack
+}// end class Guy
