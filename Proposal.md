@@ -33,9 +33,6 @@ S: Attack
 Interesting Features:
 
 There are 4 possible characters that you can play, two on each side!
-
 To activate, take away the // that are in front of the addObject
-
 To deactivate, add the // in front of the addObject
-
 I also made these characters myself! Some were referenced from existing characters.
