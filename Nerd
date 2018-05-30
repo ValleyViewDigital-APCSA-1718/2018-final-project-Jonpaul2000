@@ -16,16 +16,16 @@ public class Nerd extends Guy
     public Nerd(String name, int wide, int high)
     {
        super(name, wide, high);
-    }
+    }// end three-arg constructor
     public void act() 
     {
         // Add your action code here.
         move();
         jump();
         attack();
-    } 
-    public int getJumpConstant()
+    }// end method act
+    public int getJumpConstant()        //nerd jumps higher than the asian
     {
         return -27;
-    }
+    }// end method override getJumpConstant
 }
