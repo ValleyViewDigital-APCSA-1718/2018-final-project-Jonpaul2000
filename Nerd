@@ -1,0 +1,31 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Edgar here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Nerd extends Guy
+{
+    /**
+     * Act - do whatever the Edgar wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    
+    public Nerd(String name, int wide, int high)
+    {
+       super(name, wide, high);
+    }
+    public void act() 
+    {
+        // Add your action code here.
+        move();
+        jump();
+        attack();
+    } 
+    public int getJumpConstant()
+    {
+        return -27;
+    }
+}
