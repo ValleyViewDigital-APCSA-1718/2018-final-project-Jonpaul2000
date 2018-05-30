@@ -1,0 +1,53 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Level1 here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Battlefield extends World
+{
+
+    /**
+     * Constructor for objects of class Level1.
+     * 
+     */
+    int[][] layout = {{630, 315, 945},
+                     {220, 440, 440}};
+    public Battlefield()
+    {    
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(1260, 720, 1); 
+        GreenfootImage bg = new GreenfootImage("yoshi_bkgd.png");
+        bg.scale(1260, 720);
+        setBackground(bg);
+        
+        Guy mike = new Asian("Mike.PNG", 48, 68);
+        addObject (mike, 1160, 300); 
+        
+        /*
+        Guy edgar = new Nerd("Edgar.PNG", 48, 64);
+        addObject (edgar, 1060, 300);
+        */
+        
+        Girl nia = new Gormotti("Nia8bit.png", 44, 76);
+        addObject (nia, 100, 300);
+        
+        /*
+        Girl shiki = new Cinderella("Cinderella.PNG", 52, 76);
+        addObject (shiki, 200, 300);
+        */
+        
+        for(int i=0; i<7; i++)
+        {
+            Ground tile1 = new Ground();
+            addObject (tile1, 90 + (180*i), 680);
+        }
+        for (int c=0; c<3; c++)
+        {
+            Cloud tile2 = new Cloud();
+            addObject (tile2, layout[0][c], layout[1][c]);
+        }
+    }
+}
