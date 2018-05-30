@@ -15,4 +15,4 @@ public interface Character
     public abstract void move();
     public abstract void jump();
     public abstract void fall();
-}
+}// end interface Character
