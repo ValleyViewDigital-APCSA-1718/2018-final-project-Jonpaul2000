@@ -1,0 +1,27 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Nia here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Gormotti extends Girl
+{
+    /**
+     * Act - do whatever the Nia wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public Gormotti(String name, int wide, int high)
+    {
+       super(name, wide, high);
+    }
+    public void act() 
+    {
+        // Add your action code here.
+        move();
+        jump();
+        attack();
+        //getWorld().showText(toString(), 200, 50);
+    }  
+}
