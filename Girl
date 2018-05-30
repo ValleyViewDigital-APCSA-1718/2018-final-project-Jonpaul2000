@@ -123,4 +123,4 @@ public class Girl extends Actor implements Character
         result += "\nLineY: " + lineY;
         return result;
     }// end method toString
-}
+}// end class Girl
