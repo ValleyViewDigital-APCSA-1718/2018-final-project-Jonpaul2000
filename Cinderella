@@ -15,16 +15,16 @@ public class Cinderella extends Girl
     public Cinderella(String name, int wide, int high)
     {
        super(name, wide, high);
-    }
+    }// end three-arg constructor
     public void act() 
     {
         // Add your action code here.
         move();
         jump();
         attack();
-    }
-    public double getFallConstant()
+    }// end method act
+    public double getFallConstant()     //Cinderella falls faster than the catgirl
     {
         return .9;
-    }
-}
+    }// end method override getFallConstant
+}// end class Cinderella
