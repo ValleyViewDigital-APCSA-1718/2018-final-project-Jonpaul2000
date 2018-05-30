@@ -13,20 +13,16 @@ public class Cloud extends Ground
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private static int[][] layout = {{630, 315, 945},
-                             {220, 440, 440}};
+                                    {220, 440, 440}};
                              
     public Cloud()
     {
         GreenfootImage cloud1 = new GreenfootImage("cloud.png");
         cloud1.scale(300, 40);
         setImage(cloud1);
-    }
+    }// end zero-arg constructor
     public static int getLayout(int k, int l)
     {
         return layout[k][l];
-    }
-    public void act() 
-    {
-        // Add your action code here.
-    }    
-}
+    }// end method getLayout
+}// end class Cloud
