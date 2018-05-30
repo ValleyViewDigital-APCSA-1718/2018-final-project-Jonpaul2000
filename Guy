@@ -1,32 +1,134 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Cloud here.
+ * Write a description of class Guy here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Cloud extends Ground
+public class Guy extends Actor implements Character
 {
     /**
-     * Act - do whatever the Cloud wants to do. This method is called whenever
+     * Act - do whatever the Guy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private static int[][] layout = {{630, 315, 945},
-                             {220, 440, 440}};
-                             
-    public Cloud()
+    private String imageName;
+    private int width;
+    private int height;
+    private double speed;
+    private int ySpeed;
+    private int ground;
+    private int jumpConstant;
+    private int killFrame;
+    private int invincibility;
+
+    public Guy(String imageName, int width, int height)
     {
-        GreenfootImage cloud1 = new GreenfootImage("cloud.png");
-        cloud1.scale(300, 40);
-        setImage(cloud1);
+        this.imageName = imageName;
+        this.width = width;
+        this.height = height;
+        
+        GreenfootImage p1 = new GreenfootImage(imageName);
+        p1.scale(width, height);
+        setImage(p1);
     }
-    public static int getLayout(int k, int l)
+    
+    public void act()
     {
-        return layout[k][l];
     }
-    public void act() 
+    
+    public int getJumpConstant()
     {
-        // Add your action code here.
-    }    
+        return -25;
+    }
+    public int getInvincibility()
+    {
+        return invincibility;
+    }
+    
+    public void move()
+    {
+        if (Greenfoot.isKeyDown("right"))
+        {
+            speed = 5;
+            move((int)speed);
+            }
+        else if (Greenfoot.isKeyDown("left"))
+        {
+            speed = -5;
+            move((int)speed);
+        }
+        if (speed > 0)
+        {
+            speed = speed - .2;
+            move((int)speed);
+        }
+        if (speed < 0)
+        {   
+            speed = speed + .2;
+            move((int)speed);
+        }
+    }
+    public void jump()
+    {
+        ground = 680 - (int)(height*1.15);
+        for(int j=0; j<3; j++)
+        {
+            if ((getX()>=Cloud.getLayout(0, j)-150) && (getX()<=Cloud.getLayout(0, j)+150)
+               && (getY() <= Cloud.getLayout(1, j)) && (ySpeed >= 0))
+            {
+                ground = Cloud.getLayout(1, j) - (int)(height*.5);
+            }
+        }
+        boolean onGround = (getY() == ground);
+        if (!onGround)
+        {
+            fall();
+            attack();
+        }
+        else
+        {
+            if (Greenfoot.isKeyDown("up"))
+            {
+                ySpeed = getJumpConstant();
+                setLocation(getX(), getY()+ySpeed);
+            }
+        }
+    }  
+    public void fall()
+    {
+        ySpeed++;
+        setLocation(getX(), getY()+ySpeed);
+        if (getY() >= ground)
+        {
+            setLocation (getX(), ground);
+            ySpeed = 0;
+        }
+    }
+    public void attack()
+    {
+        if ("down".equals(Greenfoot.getKey()))
+        {
+            killFrame = 30;
+            while (killFrame > 0)
+            {
+                if (isTouching(Girl.class))
+                {
+                    removeTouching(Girl.class);
+                }
+                killFrame--;
+            }
+        }
+    }
+    public void block()
+    {
+        if ("enter".equals(Greenfoot.getKey()))
+        {
+            invincibility = 25;
+            while (invincibility > 0)
+            {
+                invincibility--;
+            }
+        }
+    }
 }
