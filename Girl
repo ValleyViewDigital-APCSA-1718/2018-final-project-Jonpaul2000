@@ -1,0 +1,126 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Girl here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Girl extends Actor implements Character
+{
+    /**
+     * Act - do whatever the Girl wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    private String imageName;
+    private int width;
+    private int height;
+    private double speed;
+    private double ySpeed;
+    private int ground;
+    private int killFrame;
+
+    public Girl(String imageName, int width, int height)
+    {
+        this.imageName = imageName;
+        this.width = width;
+        this.height = height;
+        
+        GreenfootImage p2 = new GreenfootImage(imageName);
+        p2.scale(width, height);
+        setImage(p2);
+    }
+    
+    public int getJumpConstant()
+    {
+        return -20;
+    }
+    public double getFallConstant()
+    {
+        return .8;
+    }
+    
+    public void move()
+    {
+        if (Greenfoot.isKeyDown("d"))
+        {
+            speed = 4;
+            move((int)speed);
+        }
+        else if (Greenfoot.isKeyDown("a"))
+        {
+            speed = -4;
+            move((int)speed);
+        }
+        if (speed > 0)
+        {
+            speed = speed - .1;
+            move((int)speed);
+        }
+        if (speed < 0)
+        {
+            speed = speed + .1;
+            move((int)speed);
+        }
+    }
+    public void jump()
+    {
+        ground = 680 - (int)(height*1.15);
+        for(int j=0; j<3; j++)
+        {
+            if ((getX()>=Cloud.getLayout(0, j)-150) && (getX()<=Cloud.getLayout(0, j)+150)
+               && (getY() <= Cloud.getLayout(1, j)) && (ySpeed >= 0))
+            {
+                ground = Cloud.getLayout(1, j) - (int)(height*.5);
+            }
+        }
+        boolean onGround = ((getY() == ground));
+        if (!onGround)
+        {
+            fall();
+            attack();
+        }
+        else
+        {
+            if (Greenfoot.isKeyDown("w"))
+            {
+                ySpeed = getJumpConstant();
+                setLocation(getX(), getY()+(int)ySpeed);
+            }
+        }
+    }  
+    public void fall()
+    {
+        ySpeed = ySpeed + getFallConstant();
+        setLocation(getX(), getY()+(int)ySpeed);
+        if (getY() >= ground)
+        {
+            setLocation (getX(), ground);
+            ySpeed = 0;
+        }
+    } 
+    public void attack()
+    {
+        if (Greenfoot.isKeyDown("s"))
+        {
+            killFrame = 30;
+            while (killFrame > 0)
+            {
+                if (isTouching(Guy.class))
+                {
+                    removeTouching(Guy.class);
+                }
+                killFrame--;
+            }
+        }
+    }
+    public String toString()
+    {
+        boolean lineX = ((getX()>=Cloud.getLayout(0, 1)-150) && (getX()<=Cloud.getLayout(0, 1)+150));
+        boolean lineY = (getY() <= Cloud.getLayout(1, 1) - (int)(height*1.15));
+        String result = "Position: (" + getX() + ", " + getY() + ")\n";
+        result += "LineX: " + lineX;
+        result += "\nLineY: " + lineY;
+        return result;
+    }
+}
