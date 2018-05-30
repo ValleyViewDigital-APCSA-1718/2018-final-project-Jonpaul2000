@@ -23,6 +23,8 @@ public class Battlefield extends World
         bg.scale(1260, 720);
         setBackground(bg);
         
+        // Playable Characters:
+        
         Guy mike = new Asian("Mike.PNG", 48, 68);
         addObject (mike, 1160, 300); 
         
@@ -39,15 +41,15 @@ public class Battlefield extends World
         addObject (shiki, 200, 300);
         */
         
-        for(int i=0; i<7; i++)
+        for(int i=0; i<7; i++)      //layout the ground
         {
             Ground tile1 = new Ground();
             addObject (tile1, 90 + (180*i), 680);
-        }
-        for (int c=0; c<3; c++)
+        }// end ground for-loop
+        for (int c=0; c<3; c++)         //add the cloud platforms
         {
             Cloud tile2 = new Cloud();
             addObject (tile2, layout[0][c], layout[1][c]);
-        }
+        }// end cloud for loop
     }
 }
