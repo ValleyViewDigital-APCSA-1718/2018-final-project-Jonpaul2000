@@ -15,7 +15,7 @@ public class Gormotti extends Girl
     public Gormotti(String name, int wide, int high)
     {
        super(name, wide, high);
-    }
+    }// end three-arg constructor
     public void act() 
     {
         // Add your action code here.
@@ -23,5 +23,5 @@ public class Gormotti extends Girl
         jump();
         attack();
         //getWorld().showText(toString(), 200, 50);
-    }  
-}
+    }// end method act
+}// end class Gormotti
