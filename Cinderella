@@ -1,0 +1,30 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Cinderella here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Cinderella extends Girl
+{
+    /**
+     * Act - do whatever the Cinderella wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public Cinderella(String name, int wide, int high)
+    {
+       super(name, wide, high);
+    }
+    public void act() 
+    {
+        // Add your action code here.
+        move();
+        jump();
+        attack();
+    }
+    public double getFallConstant()
+    {
+        return .9;
+    }
+}
